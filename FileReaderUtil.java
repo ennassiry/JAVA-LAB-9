@@ -4,18 +4,25 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-
 public class FileReaderUtil {
 
-    public void readFileModern(String filePath) {
-        // La ressource déclarée entre parenthèses est automatiquement fermée
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
+    public void readFileModern(String cheminFichier) {
+
+        // Lecture du fichier avec fermeture automatique de la ressource
+        try (BufferedReader lecteur = new BufferedReader(
+                new FileReader(cheminFichier))) {
+
+            String contenu;
+
+            // Parcourir le fichier jusqu'à la dernière ligne
+            while ((contenu = lecteur.readLine()) != null) {
+                System.out.println(contenu);
             }
-        } catch (IOException e) {
-            System.err.println("Erreur d'E/S avec le fichier : " + e.getMessage());
+
+        } catch (IOException ex) {
+
+            System.err.println("Problème lors de la lecture du fichier : "
+                    + ex.getMessage());
         }
     }
 }
