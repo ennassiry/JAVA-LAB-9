@@ -7,13 +7,22 @@ import java.time.LocalDateTime;
 
 public class LoggerUtil {
 
-    public static void logError(String message) {
-        // Ouverture du fichier en mode append (true)
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("error.log", true))) {
-            writer.write("[" + LocalDateTime.now() + "] " + message);
-            writer.newLine();
-        } catch (IOException e) {
-            System.err.println("Impossible d'écrire dans le fichier de log : " + e.getMessage());
+    public static void logError(String erreur) {
+
+        // Ajouter le nouveau message à la fin du fichier
+        try (BufferedWriter fichier = new BufferedWriter(
+                new FileWriter("error.log", true))) {
+
+            // Enregistrer la date, l'heure et le message d'erreur
+            String ligne = "[" + LocalDateTime.now() + "] " + erreur;
+
+            fichier.write(ligne);
+            fichier.newLine();
+
+        } catch (IOException ex) {
+
+            System.err.println("Erreur pendant l'enregistrement du journal : "
+                    + ex.getMessage());
         }
     }
 }
