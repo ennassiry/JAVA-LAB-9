@@ -1,21 +1,26 @@
 package ennassiry.com;
 
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("=== DÉBUT DU PROGRAMME TP9 ===");
 
-        // Test de la création d'un utilisateur invalide
+    public static void main(String[] args) {
+
+        System.out.println("===== LANCEMENT DU TP9 =====");
+
+        // Vérification de la validation des informations utilisateur
         try {
-            User user = new User("", 150);
-        } catch (InvalidUserException e) {
-            System.err.println("Échec de création utilisateur : " + e.getMessage());
-            LoggerUtil.logError(e.getMessage());
+            User nouvelUtilisateur = new User("", 150);
+
+        } catch (InvalidUserException ex) {
+
+            System.err.println("Erreur lors de l'ajout de l'utilisateur : " + ex.getMessage());
+
+            LoggerUtil.logError("Problème utilisateur : " + ex.getMessage());
         }
 
-        // Test de lecture de fichier inexistant
-        FileReaderUtil readerUtil = new FileReaderUtil();
-        readerUtil.readFileModern("inexistant.txt");
+        // Tentative d'ouverture d'un fichier qui n'existe pas
+        FileReaderUtil gestionnaireFichier = new FileReaderUtil();
+        gestionnaireFichier.readFileModern("document_test.txt");
 
-        System.out.println("=== FIN DU PROGRAMME TP9 ===");
+        System.out.println("===== ARRÊT DU TP9 =====");
     }
 }
